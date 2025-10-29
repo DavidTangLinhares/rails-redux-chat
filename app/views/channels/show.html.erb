@@ -1,3 +1,6 @@
-<h1>Channels#show</h1>
-<p>Find me in app/views/channels/show.html.erb</p>
+<h1>show.html.erb</h1>
 
+<%# app/views/channels/show.html.erb %>
+<div id="chat_app"></div>
+
+<%= javascript_include_tag "chat", type: "module", "data-turbo-track": "reload" %>

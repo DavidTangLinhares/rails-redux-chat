@@ -2,6 +2,10 @@
   "name": "app",
   "private": true,
   "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "babel-loader": "^10.0.0",
     "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"
   },
@@ -13,6 +17,7 @@
     "@hotwired/turbo-rails": "^8.0.18",
     "react-emojione": "^5.0.1",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.4",
     "redux": "^5.0.1",
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.6.0"
