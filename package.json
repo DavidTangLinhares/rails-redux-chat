@@ -10,6 +10,11 @@
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
-    "@hotwired/turbo-rails": "^8.0.18"
+    "@hotwired/turbo-rails": "^8.0.18",
+    "react-emojione": "^5.0.1",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-promise": "^0.6.0"
   }
 }
