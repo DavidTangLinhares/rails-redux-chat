@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import ReduxPromise from "redux-promise";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom"; // changed
 
 import App from "./components/app";
 import messagesReducer from "./reducers/messages_reducer";
@@ -16,7 +16,7 @@ const chatContainer = document.getElementById("chat_app");
 // Initial Redux state
 const initialState = {
   messages: [],
-  channels: ["general", "react", "paris"], // TODO: fetch from Rails DB
+  channels: ["general", "react", "paris"],
 };
 
 // Combine reducers
@@ -35,10 +35,10 @@ const root = createRoot(chatContainer);
 // Render React app
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
-        <Route path="/channels/:channel" element={<App />} />
+        <Route path="*" element={<App />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 );
