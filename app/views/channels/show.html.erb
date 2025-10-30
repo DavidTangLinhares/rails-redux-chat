@@ -1,6 +1,7 @@
+<%# app/views/channels/show.html.erb %>
 <h1>show.html.erb</h1>
 
-<%# app/views/channels/show.html.erb %>
 <div id="chat_app"></div>
 
+<%= stylesheet_link_tag "chat", "data-turbo-track": "reload" %>
 <%= javascript_include_tag "chat", type: "module", "data-turbo-track": "reload" %>

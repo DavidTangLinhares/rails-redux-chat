@@ -1,3 +1,4 @@
+# app/controllers/channels_controller.rb
 class ChannelsController < ApplicationController
   def show
     if params[:id].blank?

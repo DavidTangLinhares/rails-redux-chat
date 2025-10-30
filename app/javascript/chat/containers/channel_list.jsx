@@ -24,7 +24,7 @@ class ChannelList extends Component {
         onClick={() => this.handleClick(channel)}
         role="presentation"
       >
-        #{channel}
+        # {channel}
       </li>
     );
   }
