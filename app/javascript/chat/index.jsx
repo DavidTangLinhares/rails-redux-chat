@@ -5,13 +5,10 @@ import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import ReduxPromise from "redux-promise";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; // changed
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import App from "./components/app";
 import messagesReducer from "./reducers/messages_reducer";
-
-// Grab the Rails div
-const chatContainer = document.getElementById("chat_app");
 
 // Initial Redux state
 const initialState = {
@@ -29,23 +26,22 @@ const reducers = combineReducers({
 const middlewares = applyMiddleware(logger, ReduxPromise);
 const store = createStore(reducers, initialState, middlewares);
 
-// Create React 18 root
-const root = createRoot(chatContainer);
+// Mount React on every page load if chat_app exists
+document.addEventListener("DOMContentLoaded", () => {
+  const chatContainer = document.getElementById("chat_app");
+  if (!chatContainer) return;
 
-// Render React app
-root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Routes>
-        {/* Default redirect to #/channels/general */}
-        <Route path="/" element={<Navigate to="/channels/general" replace />} />
-        {/* Optional: fallback route */}
-        <Route path="*" element={<Navigate to="/channels/general" replace />} />
+  const root = createRoot(chatContainer);
 
-        {/* Route with dynamic :channel param */}
-        <Route path="/channels/:channel" element={<App />} />
-
-      </Routes>
-    </BrowserRouter>
-  </Provider>
-);
+  root.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/channels/general" replace />} />
+          <Route path="*" element={<Navigate to="/channels/general" replace />} />
+          <Route path="/channels/:channel" element={<App />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  );
+});

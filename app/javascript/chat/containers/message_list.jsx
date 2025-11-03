@@ -1,3 +1,4 @@
+// app/javascript/chat/containers/message_list.jsx
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../actions';
@@ -6,9 +7,8 @@ import MessageForm from './message_form';
 
 const MessageList = ({ messages, selectedChannel, fetchMessages }) => {
   const listRef = useRef(null);
-  const lastFetchedChannel = useRef(null); // track last fetched channel
+  const lastFetchedChannel = useRef(null);
 
-  // Fetch messages when selectedChannel changes
   useEffect(() => {
     if (selectedChannel && selectedChannel !== lastFetchedChannel.current) {
       fetchMessages(selectedChannel);
@@ -16,7 +16,6 @@ const MessageList = ({ messages, selectedChannel, fetchMessages }) => {
     }
   }, [selectedChannel, fetchMessages]);
 
-  // Scroll to bottom on messages change
   useEffect(() => {
     if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages]);
@@ -27,7 +26,9 @@ const MessageList = ({ messages, selectedChannel, fetchMessages }) => {
         <span>Channel # {selectedChannel}</span>
       </div>
       <div className="channel-content" ref={listRef}>
-        {messages.map(m => <Message key={m.id} message={m} />)}
+        {messages.map((m) => (
+          <Message key={m.id || Math.random()} message={m} />
+        ))}
       </div>
       <MessageForm selectedChannel={selectedChannel} />
     </div>

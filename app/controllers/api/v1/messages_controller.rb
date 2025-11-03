@@ -7,7 +7,7 @@ class Api::V1::MessagesController < ActionController::API
     render json: @messages.map { |message|
       {
         id: message.id,
-        user: message.user.email.split('@').first,
+        user: message.user&.email&.split('@')&.first || "Anonymous",
         content: message.content,
         created_at: message.created_at
       }
@@ -19,7 +19,12 @@ class Api::V1::MessagesController < ActionController::API
     @message.user = current_user
 
     if @message.save
-      render json: @message.as_json(include: { user: { only: [:id, :email] } }), status: :created
+      render json: {
+        id: @message.id,
+        user: @message.user&.email&.split('@')&.first || "Anonymous",
+        content: @message.content,
+        created_at: @message.created_at
+      }, status: :created
     else
       render json: { errors: @message.errors.full_messages }, status: :unprocessable_entity
     end
