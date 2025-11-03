@@ -1,18 +1,13 @@
 import { FETCH_MESSAGES, MESSAGE_POSTED, CHANNEL_SELECTED } from '../actions';
 
-export default function(state = null, action) {
+export default function(state = [], action) {
   switch (action.type) {
-    case FETCH_MESSAGES: {
-      return action.payload.messages;
-    }
-    case MESSAGE_POSTED: {
-      const copiedState = state.slice(0);
-      copiedState.push(action.payload);
-      return copiedState;
-    }
-    case CHANNEL_SELECTED: {
-      return []; // Channel has changed. Clearing view.
-    }
+    case FETCH_MESSAGES:
+      return Array.isArray(action.payload) ? action.payload : [];
+    case MESSAGE_POSTED:
+      return [...state, action.payload];
+    case CHANNEL_SELECTED:
+      return [];
     default:
       return state;
   }

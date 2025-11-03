@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :channels, only: [ :show ]
+  # SPA entry point for React Router
+  get 'channels/*path', to: 'channels#show', constraints: ->(req) { !req.xhr? && req.format.html? }
+  get 'channels', to: redirect('/channels/general')
 
 end

@@ -24,8 +24,8 @@ puts "Creating channels..."
 
 channels = [
   Channel.create!(name: "general"),
-  Channel.create!(name: "paris"),
-  Channel.create!(name: "react")
+  Channel.create!(name: "haven"),
+  Channel.create!(name: "berlin")
 ]
 
 puts "Created #{Channel.count} channels ✅"
